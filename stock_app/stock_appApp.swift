@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct stock_appApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+    @StateObject private var viewModel = AppViewModel()  // Initialize the view model
+
+        var body: some Scene {
+            WindowGroup {
+                if viewModel.isLoading {
+                    LoadingView()
+                } else {
+                    ContentView()
+                }
+            }
         }
-    }
 }
