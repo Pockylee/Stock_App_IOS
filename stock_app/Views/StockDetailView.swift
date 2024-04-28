@@ -18,12 +18,13 @@ struct StockDetailView: View {
     
     var body: some View {
         ScrollView{
-            VStack {
-//                StockHeaderView(symbol: stockSymbol, companyName: companyName, currentPrice: currentPrice, priceChange: priceChange, percentageChange: percentageChange)
-            }
-            .navigationBarTitle(stockSymbol, displayMode: .large)
-            .navigationBarTitleDisplayMode(.automatic)
+            StockHeaderView(symbol: stockSymbol, companyName: companyName, currentPrice: currentPrice, priceChange: priceChange, percentageChange: percentageChange)
+            StockChartsView()
+            StockProfolioView()
+           
         }
+        .navigationBarTitle(stockSymbol, displayMode: .large)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
