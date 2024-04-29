@@ -12,16 +12,16 @@ struct StockProfolioView: View {
     var stockSymbol: String = "AAPL"
     
     var body: some View {
-        HStack {
-                    VStack(alignment: .leading) {
-                        Text("Portfolio")
-                            .font(.title2)
-                            .foregroundColor(.black)
+            VStack(alignment: .leading) {
+                Text("Portfolio")
+                    .font(.title2)
+                    .fontWeight(.medium)
+                    .padding(.bottom, 5)
 
-                        Text("You have \(sharesOwned) shares of \(stockSymbol).\nStart trading!")
-                            .font(.subheadline)
-                            .foregroundColor(.black)
-                    }
+                HStack{
+                    Text("You have \(sharesOwned) shares of \(stockSymbol).\nStart trading!")
+                        .font(.subheadline)
+                        .foregroundColor(.black)
                     Spacer()
                     Button(action: {
                         // Action to trade
@@ -34,7 +34,10 @@ struct StockProfolioView: View {
                             .cornerRadius(20)
                     }
                 }
-    }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    
 }
 
 #Preview {

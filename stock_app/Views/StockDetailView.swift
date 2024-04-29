@@ -21,10 +21,14 @@ struct StockDetailView: View {
             StockHeaderView(symbol: stockSymbol, companyName: companyName, currentPrice: currentPrice, priceChange: priceChange, percentageChange: percentageChange)
             StockChartsView()
             StockProfolioView()
+            StockStatsView()
+            StockAboutView()
+            StockInsightsView()
            
         }
         .navigationBarTitle(stockSymbol, displayMode: .large)
         .navigationBarTitleDisplayMode(.inline)
+        .padding(.horizontal)
     }
 }
 
