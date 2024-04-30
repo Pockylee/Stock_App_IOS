@@ -13,7 +13,7 @@ class AutocompleteViewModel: ObservableObject {
     @Published var suggestions: [AutocompleteItem] = []
     private var cancellables = Set<AnyCancellable>()
     
-    private var useMockData = true
+    private var useMockData = false
     
     init() {
         $searchText

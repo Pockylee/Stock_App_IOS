@@ -8,31 +8,29 @@
 import SwiftUI
 
 struct StockDetailView: View {
-    
-    let stockSymbol = "AAPL"
-    let companyName = "Apple Inc"
-    let currentPrice = 171.09
-    let priceChange = -7.58
-    let percentageChange = -4.24
-    
+    @StateObject var viewModel: StockDetailViewModel
+        
+        init(stockSymbol: String) {
+            _viewModel = StateObject(wrappedValue: StockDetailViewModel(stockSymbol: stockSymbol))
+        }
     
     var body: some View {
         ScrollView{
-            StockHeaderView(symbol: stockSymbol, companyName: companyName, currentPrice: currentPrice, priceChange: priceChange, percentageChange: percentageChange)
+            StockHeaderView(viewModel: viewModel)
             StockChartsView()
-            StockProfolioView()
+            StockProfolioView(viewModel: viewModel)
             StockStatsView()
             StockAboutView()
             StockInsightsView()
             StockTrendsEPSView()
            
         }
-        .navigationBarTitle(stockSymbol, displayMode: .large)
+        .navigationBarTitle(viewModel.stockSymbol, displayMode: .large)
         .navigationBarTitleDisplayMode(.inline)
         .padding(.horizontal)
     }
 }
 
 #Preview {
-    StockDetailView()
+    StockDetailView(stockSymbol: "AAPL")
 }

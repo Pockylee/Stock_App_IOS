@@ -14,7 +14,7 @@ struct FavoritesView: View {
     
     var body: some View {
                     ForEach(viewModel.favoritesItems) { item in
-                        NavigationLink(destination: StockDetailView()) {
+                        NavigationLink(destination: StockDetailView(stockSymbol: item.symbol)) {
                             FavoritesItemView(favStockItem: item)
                         }
                     }

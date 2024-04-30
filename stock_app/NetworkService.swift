@@ -124,7 +124,67 @@ class NetworkService {
             }
         }.resume()
     }
+    
+    static func fetchCompanyProfile(for symbol: String, completion: @escaping (Result<CompanyProfile, Error>) -> Void) {
+        let urlString = "\(APIConfig.baseURL)/profile/\(symbol)"
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                return
+            }
+            
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                }
+                return
+            }
+            
+            do {
+                let companyProfile = try JSONDecoder().decode(CompanyProfile.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(companyProfile))
+                }
+            } catch {
+                print("JSON Decoding error: \(error.localizedDescription)")
+                print(String(data: data, encoding: .utf8) ?? "Invalid UTF-8 data")
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
+    
+    static func fetchStockPortfolio(for symbol: String, completion: @escaping (Result<StockPortfolio, Error>) -> Void) {
+        let url = URL(string: "\(APIConfig.baseURL)/portfolio")!
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(.failure(error ?? NSError(domain: "", code: -1, userInfo: nil)))
+                return
+            }
+            do {
+                let items = try JSONDecoder().decode([StockPortfolio].self, from: data)
+                if let item = items.first(where: { $0.symbol == symbol }) {
+                    completion(.success(item))
+                } else {
+                    completion(.failure(NSError(domain: "", code: -2, userInfo: [NSLocalizedDescriptionKey: "Symbol not found"])))
+                }
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
 }
+    
+    
+
 
 
 struct StockPriceDetail: Decodable {
@@ -136,4 +196,30 @@ struct StockPriceDetail: Decodable {
     let o: Double  // Open price
     let pc: Double // Previous close price
     let t: Int     // Timestamp
+}
+
+
+struct CompanyProfile: Decodable {
+    let country: String
+    let currency: String
+    let estimateCurrency: String
+    let exchange: String
+    let finnhubIndustry: String
+    let ipo: String
+    let logo: String
+    let marketCapitalization: Double
+    let name: String
+    let phone: String
+    let shareOutstanding: Double
+    let ticker: String
+    let weburl: String
+}
+
+
+struct StockPortfolio: Decodable {
+    let symbol: String
+    let companyName: String
+    let quantity: Int
+    let totalCost: Double
+    let averageCost: Double
 }

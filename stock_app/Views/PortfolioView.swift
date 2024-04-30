@@ -15,7 +15,7 @@ struct PortfolioView: View {
                     HeaderView(netWorth: viewModel.netWorth, cashBalance: viewModel.cashBalance)
 
                     ForEach(viewModel.portfolioItems) { item in
-                        NavigationLink(destination: StockDetailView()) {
+                        NavigationLink(destination: StockDetailView(stockSymbol: item.symbol)) {
                             PortfolioItemView(stockItem: item)
                         }
                     }

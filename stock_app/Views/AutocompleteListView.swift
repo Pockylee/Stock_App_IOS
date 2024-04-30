@@ -13,7 +13,7 @@ struct AutocompleteListView: View {
     var body: some View {
 
             List(viewModel.suggestions, id: \.self) { suggestion in
-                NavigationLink(destination: StockDetailView()){
+                NavigationLink(destination: StockDetailView(stockSymbol: suggestion.symbol)){
                     VStack(alignment: .leading) {
                         Text(suggestion.symbol)
                             .font(.headline)

@@ -29,6 +29,7 @@
 		75C5A2552BE0B64600A4774E /* StockNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5A2542BE0B64600A4774E /* StockNewsView.swift */; };
 		75C5A2572BE0C29B00A4774E /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5A2562BE0C29B00A4774E /* Configuration.swift */; };
 		75C5A2592BE0D6D400A4774E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5A2582BE0D6D400A4774E /* NetworkService.swift */; };
+		75C5A25B2BE1390F00A4774E /* StockDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C5A25A2BE1390F00A4774E /* StockDetailViewModel.swift */; };
 		75D81BEF2BC618EE00015180 /* stock_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D81BEE2BC618EE00015180 /* stock_appApp.swift */; };
 		75D81BF12BC618EE00015180 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D81BF02BC618EE00015180 /* ContentView.swift */; };
 		75D81BF32BC618EF00015180 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D81BF22BC618EF00015180 /* Assets.xcassets */; };
@@ -78,6 +79,7 @@
 		75C5A2542BE0B64600A4774E /* StockNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockNewsView.swift; sourceTree = "<group>"; };
 		75C5A2562BE0C29B00A4774E /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		75C5A2582BE0D6D400A4774E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		75C5A25A2BE1390F00A4774E /* StockDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailViewModel.swift; sourceTree = "<group>"; };
 		75D81BEB2BC618EE00015180 /* stock_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = stock_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D81BEE2BC618EE00015180 /* stock_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stock_appApp.swift; sourceTree = "<group>"; };
 		75D81BF02BC618EE00015180 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				7596BA602BD4B73B00E76013 /* AppViewModel.swift */,
 				7596BA622BD4C4F100E76013 /* PortfolioViewModel.swift */,
 				7596BA682BD5195900E76013 /* FavoritesViewModel.swift */,
+				75C5A25A2BE1390F00A4774E /* StockDetailViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				7596BA6B2BD5E16D00E76013 /* StockHeaderView.swift in Sources */,
 				7596BA6F2BDEA4CC00E76013 /* StockProfolioView.swift in Sources */,
 				75D81BF12BC618EE00015180 /* ContentView.swift in Sources */,
+				75C5A25B2BE1390F00A4774E /* StockDetailViewModel.swift in Sources */,
 				75D81BEF2BC618EE00015180 /* stock_appApp.swift in Sources */,
 				75C5A2592BE0D6D400A4774E /* NetworkService.swift in Sources */,
 				75C5A2512BDFA76600A4774E /* StockInsightsView.swift in Sources */,

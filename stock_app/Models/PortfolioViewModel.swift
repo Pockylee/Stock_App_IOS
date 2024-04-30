@@ -54,16 +54,17 @@ class PortfolioViewModel: ObservableObject {
         }
     }
     
-    
     private func startUpdatingPortfolio() {
         updateTimer = Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { _ in
             self.updatePortfolioItemsWithCurrentValues()
         }
     }
+    
     private func calculateNetWorth() {
         netWorth = portfolioItems.reduce(0) { $0 + ($1.currentValue * Double($1.shares)) }
         netWorth += cashBalance // Include cash balance in net worth calculation
     }
+    
     deinit {
         updateTimer?.invalidate()
     }
@@ -86,9 +87,3 @@ struct PortfolioAPIItem: Decodable {
     let symbol: String
     let quantity: Int
 }
-
-//struct PortfolioDetails: Decodable {
-//    let c: Double
-//    let d: Double
-//    let dp: Double
-//}
