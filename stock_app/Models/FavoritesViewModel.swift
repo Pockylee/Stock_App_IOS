@@ -10,24 +10,59 @@ import Foundation
 class FavoritesViewModel: ObservableObject {
     @Published var favoritesItems: [FavStockItem] = []
     
-    init() {
-            loadData()
-        }
-        
-        func loadData() {
-            // Dummy data for preview and testing
-            favoritesItems = [
-                FavStockItem(symbol: "NVDA", companyName: "NVDIA Corp", currentValue: 513.06, changeValue: -0.63, changePercentage: -0.12, isPositiveChange: false),
-                FavStockItem(symbol: "AAPL", companyName: "Apple Inc", currentValue: 2746.44, changeValue: 7.38, changePercentage: 0.27, isPositiveChange: true)
-                // Add more items as needed
-            ]
-        }
+    private var updateTimer: Timer?
     
-    func fetchFavoritesData() {
-        // Repeat for other data, such as fetching stock items
+    init() {
+        loadData()
+        fetchFavoriteData()
+        startUpdatingFavorites()
     }
     
-    // Add methods for fetching from different APIs
+    func loadData() {
+        // Dummy data for preview and testing
+        //        favoritesItems = [
+        //            FavStockItem(symbol: "NVDA", companyName: "NVDIA Corp", currentValue: 513.06, changeValue: -0.63, changePercentage: -0.12, isPositiveChange: false),
+        //            FavStockItem(symbol: "AAPL", companyName: "Apple Inc", currentValue: 2746.44, changeValue: 7.38, changePercentage: 0.27, isPositiveChange: true)
+        //            // Add more items as needed
+        //        ]
+    }
+    
+    func fetchFavoriteData() {
+        NetworkService.fetchFavoriteItems { [weak self] items in
+            self?.favoritesItems = items
+            self?.updateFavoritesItemsWithCurrentValues()
+        }
+    }
+    
+    private func updateFavoritesItemsWithCurrentValues() {
+        for index in favoritesItems.indices {
+            let symbol = favoritesItems[index].symbol
+            NetworkService.fetchStockPriceDetails(for: symbol) { result in
+                switch result {
+                case .success(let details):
+                    DispatchQueue.main.async {
+                        self.favoritesItems[index].currentValue = details.c
+                        self.favoritesItems[index].changeValue = details.d
+                        self.favoritesItems[index].changePercentage = details.dp
+                        self.favoritesItems[index].isPositiveChange = details.d >= 0
+                    }
+                case .failure(let error):
+                    print("Error fetching details for \(symbol): \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    private func startUpdatingFavorites() {
+        updateTimer = Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { _ in
+            self.updateFavoritesItemsWithCurrentValues()
+        }
+    }
+    
+    deinit {
+        updateTimer?.invalidate()
+    }
+
 }
 
 
@@ -35,8 +70,13 @@ struct FavStockItem: Identifiable {
     let id = UUID()
     let symbol: String
     let companyName: String
-    let currentValue: Double
-    let changeValue: Double
-    let changePercentage: Double
-    let isPositiveChange: Bool
+    var currentValue: Double
+    var changeValue: Double
+    var changePercentage: Double
+    var isPositiveChange: Bool
+}
+
+struct FavoriteAPIItem: Decodable {
+    let symbol: String
+    let companyName: String
 }

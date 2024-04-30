@@ -12,19 +12,10 @@ const uniqueValidator = require('mongoose-unique-validator');
 const { watch } = require('fs');
 // app.use(express.static('browser'));
 app.use(express.static('public'));
-
-// app.get('/search/home', function(req, res) {
-//     res.sendFile('index.html', {root: 'browser'});
-// });
-
-// app.get('/', function(req, res) {
-//     res.sendFile('index.html', {root: 'browser'});
-// });
-
-
 app.use(express.json());
 
 const uri = "mongodb+srv://brian7149:brian0329@stocksearchhw3.zcnjngt.mongodb.net/?retryWrites=true&w=majority&appName=StockSearchHW3";
+// const uri = "mongodb+srv://brian7149:brian0329@stocksearchhw3.zcnjngt.mongodb.net/StockAppIOS?retryWrites=true&w=majority&appName=StockSearchHW3";
 
 mongoose.connect(uri)
   .then(() => console.log('MongoDB connected...'))
@@ -40,7 +31,7 @@ const watchlistSchema = new Schema({
 watchlistSchema.plugin(uniqueValidator)
 const Watchlist  = mongoose.model('Watchlist', watchlistSchema);
 
-const prtfolioSchema = new Schema({
+const portfolioSchema = new Schema({
     symbol: {
         type: String,
         required: true,
@@ -67,7 +58,7 @@ const prtfolioSchema = new Schema({
 
     });
 
-const Portfolio = mongoose.model('Portfolio', prtfolioSchema);
+const Portfolio = mongoose.model('Portfolio', portfolioSchema);
 
 const WalletSchema = new mongoose.Schema({
     balance: {

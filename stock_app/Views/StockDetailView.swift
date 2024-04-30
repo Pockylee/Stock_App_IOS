@@ -24,6 +24,7 @@ struct StockDetailView: View {
             StockStatsView()
             StockAboutView()
             StockInsightsView()
+            StockTrendsEPSView()
            
         }
         .navigationBarTitle(stockSymbol, displayMode: .large)

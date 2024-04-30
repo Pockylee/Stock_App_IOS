@@ -14,7 +14,7 @@ class AutocompleteViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     private var useMockData = true
-
+    
     init() {
         $searchText
             .removeDuplicates()
@@ -22,7 +22,7 @@ class AutocompleteViewModel: ObservableObject {
             .sink(receiveValue: loadAutocompleteSuggestions)
             .store(in: &cancellables)
     }
-
+    
     private func loadAutocompleteSuggestions(for searchText: String) {
         
         if useMockData {
@@ -52,23 +52,23 @@ class AutocompleteViewModel: ObservableObject {
             }
             let urlString = "http://127.0.0.1:8080/api/autocomplete/\(searchText)"
             guard let url = URL(string: urlString) else { return }
-
+            
             URLSession.shared.dataTaskPublisher(for: url)
-                    .map(\.data)
-                    .decode(type: [AutocompleteItem].self, decoder: JSONDecoder())  // Corrected to expect an array directly
-                    .receive(on: DispatchQueue.main)
-                    .sink(receiveCompletion: { completion in
-                        // Your error handling...
-                    }, receiveValue: { [weak self] fetchedItems in
-                        self?.suggestions = fetchedItems
-                    })
-                    .store(in: &cancellables)
+                .map(\.data)
+                .decode(type: [AutocompleteItem].self, decoder: JSONDecoder())  // Corrected to expect an array directly
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { completion in
+                    // Your error handling...
+                }, receiveValue: { [weak self] fetchedItems in
+                    self?.suggestions = fetchedItems
+                })
+                .store(in: &cancellables)
         }
         
     }
     
     func selectSuggestion(_ suggestion: AutocompleteItem) {
-            self.searchText = suggestion.symbol
+        self.searchText = suggestion.symbol
     }
     
     

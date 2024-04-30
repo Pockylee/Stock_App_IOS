@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct StockInsightsView: View {
+    var totalMSPR: Double = -654.26
+    var positiveMSPR: Double = 200
+    var negativeMSPR: Double = -854.26
+    
+    var totalChange: Double = -654.26
+    var positiveChange: Double = 200
+    var negativeChange: Double = -854.26
+    
     var body: some View {
         VStack() {
             Text("Insights")
@@ -36,22 +44,22 @@ struct StockInsightsView: View {
                         Text("MSPR")
                             .fontWeight(.bold)
                         Divider()
-                        Text("Total")
+                        Text("\(totalMSPR, specifier: "%.2f")")
                         Divider()
-                        Text("Positive")
+                        Text("\(positiveMSPR, specifier: "%.2f")")
                         Divider()
-                        Text("Negative")
+                        Text("\(negativeMSPR, specifier: "%.2f")")
                         Divider()
                     }
                     VStack(alignment: .leading, spacing: 10){
                         Text("Change")
                             .fontWeight(.bold)
                         Divider()
-                        Text("Total")
+                        Text("\(totalChange, specifier: "%.2f")")
                         Divider()
-                        Text("Positive")
+                        Text("\(positiveChange, specifier: "%.2f")")
                         Divider()
-                        Text("Negative")
+                        Text("\(negativeChange, specifier: "%.2f")")
                         Divider()
                     }
                     
