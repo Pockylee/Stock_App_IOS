@@ -9,17 +9,19 @@ import SwiftUI
 
 struct StockDetailView: View {
     @StateObject var viewModel: StockDetailViewModel
+    @StateObject var portfolioViewModel: PortfolioViewModel
     @State private var isStockInWatchlist = true
     
     init(stockSymbol: String) {
         _viewModel = StateObject(wrappedValue: StockDetailViewModel(stockSymbol: stockSymbol))
+        _portfolioViewModel = StateObject(wrappedValue: PortfolioViewModel())
     }
     
     var body: some View {
         ScrollView{
             StockHeaderView(viewModel: viewModel)
             StockChartsView(viewModel: viewModel)
-            StockProfolioView(viewModel: viewModel)
+            StockProfolioView(viewModel: viewModel, portfolioViewModel: portfolioViewModel)
             StockStatsView(viewModel: viewModel)
             StockAboutView(viewModel: viewModel)
             StockInsightsView(viewModel: viewModel)

@@ -9,8 +9,9 @@ import SwiftUI
 
 struct StockProfolioView: View {
     @ObservedObject var viewModel: StockDetailViewModel
+    @ObservedObject var portfolioViewModel: PortfolioViewModel
     @State private var showTrade = false
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Portfolio")
@@ -43,16 +44,22 @@ struct StockProfolioView: View {
                 Spacer()
                 Button(action: {
                     showTrade = true                }) {
-                    Text("Trade")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.green)
-                        .cornerRadius(20)
-                }
-                .sheet(isPresented: $showTrade) {
-                    TradeSheetView(viewModel: viewModel)
-                }
+                        Text("Trade")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 20)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                            .background(Color.green)
+                            .cornerRadius(30)
+                    }
+                    .padding(.horizontal)
+                
+                    .sheet(isPresented: $showTrade) {
+                        TradeSheetView(viewModel: viewModel, portfolioViewModel: portfolioViewModel)
+                    }
                 
             }
         }
@@ -62,5 +69,5 @@ struct StockProfolioView: View {
 }
 
 #Preview {
-    StockProfolioView(viewModel: StockDetailViewModel(stockSymbol: "AAPL"))
+    StockProfolioView(viewModel: StockDetailViewModel(stockSymbol: "AAPL"), portfolioViewModel: PortfolioViewModel())
 }
