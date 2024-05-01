@@ -68,6 +68,9 @@ struct HomeView: View {
                         }
                 }
             }
+            .onAppear {
+                favoritesViewModel.refreshData()
+                }
         }
     func openURL(_ url: URL?) {
             guard let url = url, UIApplication.shared.canOpenURL(url) else {

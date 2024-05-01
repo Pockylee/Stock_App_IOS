@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StockProfolioView: View {
     @ObservedObject var viewModel: StockDetailViewModel
+    @State private var showTrade = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -41,8 +42,7 @@ struct StockProfolioView: View {
                 }
                 Spacer()
                 Button(action: {
-                    // Action to trade
-                }) {
+                    showTrade = true                }) {
                     Text("Trade")
                         .font(.headline)
                         .foregroundColor(.white)
@@ -50,6 +50,10 @@ struct StockProfolioView: View {
                         .background(Color.green)
                         .cornerRadius(20)
                 }
+                .sheet(isPresented: $showTrade) {
+                    TradeSheetView(viewModel: viewModel)
+                }
+                
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

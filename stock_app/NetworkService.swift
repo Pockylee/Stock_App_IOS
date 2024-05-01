@@ -181,11 +181,177 @@ class NetworkService {
             }
         }.resume()
     }
+    
+    static func fetchCompanyPeers(for symbol: String, completion: @escaping (Result<[String], Error>) -> Void) {
+            let urlString = "\(APIConfig.baseURL)/peers/\(symbol)"
+            guard let url = URL(string: urlString) else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+                return
+            }
+
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                    return
+                }
+
+                guard let data = data else {
+                    DispatchQueue.main.async {
+                        completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                    }
+                    return
+                }
+
+                do {
+                    let peers = try JSONDecoder().decode([String].self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(peers))
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
+            }.resume()
+        }
+    
+    static func fetchInsiderData(for symbol: String, completion: @escaping (Result<[InsiderData], Error>) -> Void) {
+        let urlString = "\(APIConfig.baseURL)/insider/\(symbol)"
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                return
+            }
+
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                }
+                return
+            }
+
+            do {
+                let response = try JSONDecoder().decode(InsiderResponse.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(response.data))
+                }
+            } catch {
+                print("JSON Decoding error: \(error.localizedDescription)")
+                print(String(data: data, encoding: .utf8) ?? "Invalid UTF-8 data")
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
+    
+    static func fetchNewsData(for symbol: String, completion: @escaping (Result<[NewsArticle], Error>) -> Void) {
+            let urlString = "\(APIConfig.baseURL)/news/\(symbol)"
+            guard let url = URL(string: urlString) else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+                return
+            }
+
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                    return
+                }
+
+                guard let data = data else {
+                    DispatchQueue.main.async {
+                        completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                    }
+                    return
+                }
+
+                do {
+                    let newsArticles = try JSONDecoder().decode([NewsArticle].self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(newsArticles))
+                    }
+                } catch {
+                    print("JSON Decoding error: \(error.localizedDescription)")
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                }
+            }.resume()
+        }
+    
+    static func fetchSummaryChartData(for symbol: String, completion: @escaping (Result<[[String: Any]], Error>) -> Void) {
+            let urlString = "\(APIConfig.baseURL)/summarychart/\(symbol)"
+            guard let url = URL(string: urlString) else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+                return
+            }
+
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(error ?? NSError(domain: "", code: -2, userInfo: nil)))
+                    return
+                }
+
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                       let results = json["results"] as? [[String: Any]] {
+                        completion(.success(results))
+                    } else {
+                        completion(.failure(NSError(domain: "", code: -3, userInfo: [NSLocalizedDescriptionKey: "Invalid data"])))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+
+            task.resume()
+        }
+    
+    static func fetchHistoricalChartData(for symbol: String, completion: @escaping (Result<[[String: Any]], Error>) -> Void) {
+            let urlString = "\(APIConfig.baseURL)/historicalchart/\(symbol)"
+            guard let url = URL(string: urlString) else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+                return
+            }
+
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                guard error == nil else {
+                    completion(.failure(error!))
+                    return
+                }
+
+                guard let data = data else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                    return
+                }
+
+                do {
+                    if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                       let results = jsonArray["results"] as? [[String: Any]] {
+                        completion(.success(results))
+                    } else {
+                        completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid data format"])))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    
 }
     
-    
-
-
 
 struct StockPriceDetail: Decodable {
     let c: Double  // Current price
@@ -197,7 +363,6 @@ struct StockPriceDetail: Decodable {
     let pc: Double // Previous close price
     let t: Int     // Timestamp
 }
-
 
 struct CompanyProfile: Decodable {
     let country: String
@@ -215,11 +380,35 @@ struct CompanyProfile: Decodable {
     let weburl: String
 }
 
-
 struct StockPortfolio: Decodable {
     let symbol: String
     let companyName: String
     let quantity: Int
     let totalCost: Double
     let averageCost: Double
+}
+
+struct InsiderData: Decodable {
+    var symbol: String
+    var year: Int
+    var month: Int
+    var change: Double
+    var mspr: Double
+}
+
+struct InsiderResponse: Decodable {
+    var data: [InsiderData]
+    var symbol: String
+}
+
+struct NewsArticle: Identifiable, Decodable {
+    let id: Int
+    let category: String
+    let datetime: Int
+    let headline: String
+    let image: String
+    let related: String
+    let source: String
+    let summary: String
+    let url: String
 }

@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct StockInsightsView: View {
-    var totalMSPR: Double = -654.26
-    var positiveMSPR: Double = 200
-    var negativeMSPR: Double = -854.26
+    @ObservedObject var viewModel: StockDetailViewModel
     
-    var totalChange: Double = -654.26
-    var positiveChange: Double = 200
-    var negativeChange: Double = -854.26
+//    var totalMSPR: Double = -654.26
+//    var positiveMSPR: Double = 200
+//    var negativeMSPR: Double = -854.26
+//    
+//    var totalChange: Double = -654.26
+//    var positiveChange: Double = 200
+//    var negativeChange: Double = -854.26
     
+   
     var body: some View {
         VStack() {
             Text("Insights")
@@ -44,22 +47,22 @@ struct StockInsightsView: View {
                         Text("MSPR")
                             .fontWeight(.bold)
                         Divider()
-                        Text("\(totalMSPR, specifier: "%.2f")")
+                        Text("\(viewModel.totalMspChange, specifier: "%.2f")")
                         Divider()
-                        Text("\(positiveMSPR, specifier: "%.2f")")
+                        Text("\(viewModel.positiveMspChange, specifier: "%.2f")")
                         Divider()
-                        Text("\(negativeMSPR, specifier: "%.2f")")
+                        Text("\(viewModel.negativeMspChange, specifier: "%.2f")")
                         Divider()
                     }
                     VStack(alignment: .leading, spacing: 10){
                         Text("Change")
                             .fontWeight(.bold)
                         Divider()
-                        Text("\(totalChange, specifier: "%.2f")")
+                        Text("\(viewModel.totalChange, specifier: "%.2f")")
                         Divider()
-                        Text("\(positiveChange, specifier: "%.2f")")
+                        Text("\(viewModel.positiveChange, specifier: "%.2f")")
                         Divider()
-                        Text("\(negativeChange, specifier: "%.2f")")
+                        Text("\(viewModel.negativeChange, specifier: "%.2f")")
                         Divider()
                     }
                     
@@ -71,5 +74,5 @@ struct StockInsightsView: View {
 }
 
 #Preview {
-    StockInsightsView()
+    StockInsightsView(viewModel: StockDetailViewModel(stockSymbol: "AAPL"))
 }

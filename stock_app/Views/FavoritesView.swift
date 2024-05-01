@@ -18,8 +18,18 @@ struct FavoritesView: View {
                             FavoritesItemView(favStockItem: item)
                         }
                     }
+                    .onDelete(perform: deleteItem)
+                    .onMove(perform: moveItem)
 
 
+        }
+    func deleteItem(at offsets: IndexSet) {
+            guard let index = offsets.first else { return }
+            let deletedSymbol = viewModel.favoritesItems[index].symbol
+            viewModel.deleteItemWithSymbol(symbol: deletedSymbol)
+        }
+    func moveItem(from source: IndexSet, to destination: Int) {
+            viewModel.favoritesItems.move(fromOffsets: source, toOffset: destination)
         }
 }
 //#Preview {

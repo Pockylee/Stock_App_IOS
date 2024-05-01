@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct StockAboutView: View {
-    var ipoStartDate: Date = Date()
-    var industry: String = "Technology"
-    var webPage: URL = URL(string: "https://www.apple.com/")!
-    var companyPeers: [String] = ["AAPL", "DELL", "SMCI", "HPQ", "HPE"]
+    @ObservedObject var viewModel: StockDetailViewModel
+    //    var ipoStartDate: Date = Date()
+    //    var industry: String = "Technology"
+    //    var webPage: URL = URL(string: "https://www.apple.com/")!
+    //    var companyPeers: [String] = ["AAPL", "DELL", "SMCI", "HPQ", "HPE"]
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -39,17 +40,23 @@ struct StockAboutView: View {
                 
                 // Values VStack
                 VStack(alignment: .leading, spacing: 7) {
-                    Text(dateFormatter.string(from: ipoStartDate))
-                    Text(industry)
-                    Link("Website", destination: webPage)
+                    Text(viewModel.ipoDateFormatted)
+                    Text(viewModel.industry)
+                    if let url = URL(string: viewModel.webURL) {
+                        Link(viewModel.webURL, destination: url)
+                    } else {
+                        Text("Invalid URL")
+                    }
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 2) {
-                            ForEach(companyPeers, id: \.self) { peer in
-                                Text(peer)
-                                    .foregroundColor(.blue)
-                                if peer != companyPeers.last {
+                            ForEach(viewModel.companyPeers, id: \.self) { peer in
+                                NavigationLink(destination: StockDetailView(stockSymbol: peer)) {
+                                    Text(peer)
+                                        .foregroundColor(.blue)
+                                }
+                                if peer != viewModel.companyPeers.last {
                                     Text(",")
-                                        .foregroundColor(.blue) //
+                                        .foregroundColor(.blue)
                                 }
                             }
                         }
@@ -62,5 +69,5 @@ struct StockAboutView: View {
 }
 
 #Preview {
-    StockAboutView()
+    StockAboutView(viewModel: StockDetailViewModel(stockSymbol: "AAPL"))
 }

@@ -59,6 +59,29 @@ class FavoritesViewModel: ObservableObject {
         }
     }
     
+    func refreshData() {
+            fetchFavoriteData()
+        startUpdatingFavorites()
+        }
+    
+    func deleteItemWithSymbol(symbol: String) {
+            guard let url = URL(string: "\(APIConfig.baseURL)/watchlist/\(symbol)") else { return }
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error deleting item: \(error)")
+                } else if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+                    print("Unexpected response: \(httpResponse)")
+                } else {
+                    // Handle successful deletion, such as refreshing the data
+                    self.refreshData()
+                }
+            }.resume()
+        }
+    
+    
     deinit {
         updateTimer?.invalidate()
     }

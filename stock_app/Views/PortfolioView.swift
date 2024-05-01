@@ -19,8 +19,12 @@ struct PortfolioView: View {
                             PortfolioItemView(stockItem: item)
                         }
                     }
+                    .onMove(perform: movePortfolioItem)
 
 
+        }
+    func movePortfolioItem(from source: IndexSet, to destination: Int) {
+            viewModel.portfolioItems.move(fromOffsets: source, toOffset: destination)
         }
 }
 

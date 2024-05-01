@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct StockStatsView: View {
-    var highPrice: Double = 177.49
-    var lowPrice: Double = 170.85
-    var openPrice: Double = 177.00
-    var prevClosePrice: Double = 178.67
+//    var highPrice: Double = 177.49
+//    var lowPrice: Double = 170.85
+//    var openPrice: Double = 177.00
+//    var prevClosePrice: Double = 178.67
+    @ObservedObject var viewModel: StockDetailViewModel
+    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -25,12 +27,12 @@ struct StockStatsView: View {
                     HStack {
                         Text("High Price: ")
                             .fontWeight(.bold)
-                        Text("\(highPrice, specifier: "%.2f")")
+                        Text("\(viewModel.highPrice, specifier: "%.2f")")
                     }
                     HStack {
                         Text("Low Price: ")
                             .fontWeight(.bold)
-                        Text("\(lowPrice, specifier: "%.2f")")
+                        Text("\(viewModel.lowPrice, specifier: "%.2f")")
                     }
                 }
                 
@@ -41,12 +43,12 @@ struct StockStatsView: View {
                     HStack {
                         Text("Open Price: ")
                             .fontWeight(.bold)
-                        Text("\(openPrice, specifier: "%.2f")")
+                        Text("\(viewModel.openPrice, specifier: "%.2f")")
                     }
                     HStack {
                         Text("Prev. Close: ")
                             .fontWeight(.bold)
-                        Text("\(prevClosePrice, specifier: "%.2f")")
+                        Text("\(viewModel.prevClosePrice, specifier: "%.2f")")
                     }
                 }
             }
@@ -57,5 +59,5 @@ struct StockStatsView: View {
 
 
 #Preview {
-    StockStatsView()
+    StockStatsView(viewModel: StockDetailViewModel(stockSymbol: "AAPL"))
 }
