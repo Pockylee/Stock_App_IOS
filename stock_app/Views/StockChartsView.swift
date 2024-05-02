@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StockChartsView: View {
     @ObservedObject var viewModel: StockDetailViewModel
+//    @ObservedObject var hourlyChartViewModel = HourlyChartViewModel
     
     enum ChartType {
         case hourly, historical
@@ -23,8 +24,10 @@ struct StockChartsView: View {
                     if viewModel.isLoading {
                         Text("Loading...")
                     } else {
-                        WebView(htmlContent: summaryChartHtmlContent())
+                        ChartWebView(chartType: .hourly, viewModel: HourlyChartViewModel(stockSymbol: viewModel.stockSymbol))
+//                        WebView(htmlContent: summaryChartHtmlContent())
                             .frame(height: 300)
+                          
 //                            .edgesIgnoringSafeArea(.horizontal)
                     }
                 } else {
@@ -32,10 +35,9 @@ struct StockChartsView: View {
                     if viewModel.isLoading {
                         Text("Loading...")
                     } else {
-                        WebView(htmlContent: historicalChartHtmlContent())
-                            .frame(height: 300)
-//                            .edgesIgnoringSafeArea(.horizontal)
-                    }
+                        ChartWebView(chartType: .historical, viewModel: HistoricalChartViewModel(stockSymbol: viewModel.stockSymbol))
+//                        WebView(htmlContent: summaryChartHtmlContent())
+                            .frame(height: 300)                    }
                 }
             }
             //                    .padding()

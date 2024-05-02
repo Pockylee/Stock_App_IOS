@@ -15,7 +15,7 @@ class FavoritesViewModel: ObservableObject {
     init() {
         loadData()
         fetchFavoriteData()
-        startUpdatingFavorites()
+//        startUpdatingFavorites()
     }
     
     func loadData() {
@@ -31,6 +31,7 @@ class FavoritesViewModel: ObservableObject {
         NetworkService.fetchFavoriteItems { [weak self] items in
             self?.favoritesItems = items
             self?.updateFavoritesItemsWithCurrentValues()
+            self?.startUpdatingFavorites()
         }
     }
     
@@ -61,7 +62,7 @@ class FavoritesViewModel: ObservableObject {
     
     func refreshData() {
             fetchFavoriteData()
-        startUpdatingFavorites()
+//        startUpdatingFavorites()
         }
     
     func deleteItemWithSymbol(symbol: String) {

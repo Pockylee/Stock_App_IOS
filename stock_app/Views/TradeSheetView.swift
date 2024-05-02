@@ -208,7 +208,7 @@ struct TradeSheetView: View {
             
             if let jsonData = data {
                 do {
-                    let decodedResponse = try JSONDecoder().decode(PortfolioEntry.self, from: jsonData)
+                    _ = try JSONDecoder().decode(PortfolioEntry.self, from: jsonData)
                     DispatchQueue.main.async {
                         self.viewModel.sharesOwned -= shares // Update local viewModel with new shares count
                         self.successMessage = "You have successfully sold \(shares) \(shares == 1 ? "share" : "shares") of \(self.viewModel.stockSymbol)"
@@ -257,7 +257,7 @@ struct TradeSheetView: View {
             
             if let jsonData = data {
                 do {
-                    let decodedResponse = try JSONDecoder().decode(PortfolioEntry.self, from: jsonData)
+                    _ = try JSONDecoder().decode(PortfolioEntry.self, from: jsonData)
                     DispatchQueue.main.async {
                         self.viewModel.sharesOwned += shares // Update local viewModel with new shares count
                         self.successMessage = "You have successfully bought \(shares) \(shares == 1 ? "share" : "shares") of \(self.viewModel.stockSymbol)"

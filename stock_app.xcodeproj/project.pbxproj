@@ -11,6 +11,15 @@
 		7523F6562BE2354A0071D8BB /* NewsArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523F6552BE2354A0071D8BB /* NewsArticleDetailView.swift */; };
 		7523F6582BE262D00071D8BB /* WebviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523F6572BE262D00071D8BB /* WebviewService.swift */; };
 		7523F65D2BE2A98E0071D8BB /* TradeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523F65C2BE2A98E0071D8BB /* TradeSheetView.swift */; };
+		7523F6602BE36D2B0071D8BB /* hourlyChart.html in Resources */ = {isa = PBXBuildFile; fileRef = 7523F65E2BE36D2B0071D8BB /* hourlyChart.html */; };
+		7523F6612BE36D2B0071D8BB /* hourlyChart.js in Resources */ = {isa = PBXBuildFile; fileRef = 7523F65F2BE36D2B0071D8BB /* hourlyChart.js */; };
+		7523F6632BE3729E0071D8BB /* ChartsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523F6622BE3729E0071D8BB /* ChartsViewModel.swift */; };
+		7523F6662BE38ED80071D8BB /* monthlyChart.html in Resources */ = {isa = PBXBuildFile; fileRef = 7523F6642BE38ED80071D8BB /* monthlyChart.html */; };
+		7523F6672BE38ED80071D8BB /* monthlyChart.js in Resources */ = {isa = PBXBuildFile; fileRef = 7523F6652BE38ED80071D8BB /* monthlyChart.js */; };
+		7523F66A2BE399710071D8BB /* recommendationChart.html in Resources */ = {isa = PBXBuildFile; fileRef = 7523F6682BE399710071D8BB /* recommendationChart.html */; };
+		7523F66B2BE399710071D8BB /* recommendationChart.js in Resources */ = {isa = PBXBuildFile; fileRef = 7523F6692BE399710071D8BB /* recommendationChart.js */; };
+		7523F66E2BE3AA660071D8BB /* epsChart.html in Resources */ = {isa = PBXBuildFile; fileRef = 7523F66C2BE3AA650071D8BB /* epsChart.html */; };
+		7523F66F2BE3AA660071D8BB /* epsChart.js in Resources */ = {isa = PBXBuildFile; fileRef = 7523F66D2BE3AA660071D8BB /* epsChart.js */; };
 		7596BA512BD1E2DC00E76013 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596BA502BD1E2DC00E76013 /* HomeView.swift */; };
 		7596BA532BD1EC0100E76013 /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596BA522BD1EC0100E76013 /* PortfolioView.swift */; };
 		7596BA562BD1EC7500E76013 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596BA552BD1EC7500E76013 /* FavoritesView.swift */; };
@@ -64,6 +73,15 @@
 		7523F6552BE2354A0071D8BB /* NewsArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleDetailView.swift; sourceTree = "<group>"; };
 		7523F6572BE262D00071D8BB /* WebviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebviewService.swift; sourceTree = "<group>"; };
 		7523F65C2BE2A98E0071D8BB /* TradeSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeSheetView.swift; sourceTree = "<group>"; };
+		7523F65E2BE36D2B0071D8BB /* hourlyChart.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = hourlyChart.html; sourceTree = "<group>"; };
+		7523F65F2BE36D2B0071D8BB /* hourlyChart.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hourlyChart.js; sourceTree = "<group>"; };
+		7523F6622BE3729E0071D8BB /* ChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewModel.swift; sourceTree = "<group>"; };
+		7523F6642BE38ED80071D8BB /* monthlyChart.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = monthlyChart.html; sourceTree = "<group>"; };
+		7523F6652BE38ED80071D8BB /* monthlyChart.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = monthlyChart.js; sourceTree = "<group>"; };
+		7523F6682BE399710071D8BB /* recommendationChart.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = recommendationChart.html; sourceTree = "<group>"; };
+		7523F6692BE399710071D8BB /* recommendationChart.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = recommendationChart.js; sourceTree = "<group>"; };
+		7523F66C2BE3AA650071D8BB /* epsChart.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = epsChart.html; sourceTree = "<group>"; };
+		7523F66D2BE3AA660071D8BB /* epsChart.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = epsChart.js; sourceTree = "<group>"; };
 		7596BA502BD1E2DC00E76013 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7596BA522BD1EC0100E76013 /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		7596BA552BD1EC7500E76013 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
@@ -153,6 +171,14 @@
 				7523F6552BE2354A0071D8BB /* NewsArticleDetailView.swift */,
 				7523F65C2BE2A98E0071D8BB /* TradeSheetView.swift */,
 				7596BA5E2BD4B2D000E76013 /* LoadingView.swift */,
+				7523F66C2BE3AA650071D8BB /* epsChart.html */,
+				7523F66D2BE3AA660071D8BB /* epsChart.js */,
+				7523F6682BE399710071D8BB /* recommendationChart.html */,
+				7523F6692BE399710071D8BB /* recommendationChart.js */,
+				7523F6642BE38ED80071D8BB /* monthlyChart.html */,
+				7523F6652BE38ED80071D8BB /* monthlyChart.js */,
+				7523F65E2BE36D2B0071D8BB /* hourlyChart.html */,
+				7523F65F2BE36D2B0071D8BB /* hourlyChart.js */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -164,6 +190,7 @@
 				7596BA602BD4B73B00E76013 /* AppViewModel.swift */,
 				7596BA622BD4C4F100E76013 /* PortfolioViewModel.swift */,
 				7596BA682BD5195900E76013 /* FavoritesViewModel.swift */,
+				7523F6622BE3729E0071D8BB /* ChartsViewModel.swift */,
 				75C5A25A2BE1390F00A4774E /* StockDetailViewModel.swift */,
 			);
 			path = Models;
@@ -341,8 +368,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7523F66F2BE3AA660071D8BB /* epsChart.js in Resources */,
+				7523F66B2BE399710071D8BB /* recommendationChart.js in Resources */,
 				75D81BF62BC618EF00015180 /* Preview Assets.xcassets in Resources */,
+				7523F6662BE38ED80071D8BB /* monthlyChart.html in Resources */,
 				75D81BF32BC618EF00015180 /* Assets.xcassets in Resources */,
+				7523F66A2BE399710071D8BB /* recommendationChart.html in Resources */,
+				7523F66E2BE3AA660071D8BB /* epsChart.html in Resources */,
+				7523F6672BE38ED80071D8BB /* monthlyChart.js in Resources */,
+				7523F6612BE36D2B0071D8BB /* hourlyChart.js in Resources */,
+				7523F6602BE36D2B0071D8BB /* hourlyChart.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +428,7 @@
 				7596BA5F2BD4B2D000E76013 /* LoadingView.swift in Sources */,
 				7596BA632BD4C4F100E76013 /* PortfolioViewModel.swift in Sources */,
 				75C5A2572BE0C29B00A4774E /* Configuration.swift in Sources */,
+				7523F6632BE3729E0071D8BB /* ChartsViewModel.swift in Sources */,
 				7596BA672BD5190A00E76013 /* FavoritesItemView.swift in Sources */,
 				75C5A24F2BDF9BA100A4774E /* StockAboutView.swift in Sources */,
 			);

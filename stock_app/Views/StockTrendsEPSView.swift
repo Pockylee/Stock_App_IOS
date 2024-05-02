@@ -8,21 +8,19 @@
 import SwiftUI
 
 struct StockTrendsEPSView: View {
+    @ObservedObject var viewModel: StockDetailViewModel
     var body: some View {
         VStack{
-            Color.gray
+            ChartWebView(chartType: .recommendation, viewModel: RecommendationChartViewModel(stockSymbol: viewModel.stockSymbol))
+//                        WebView(htmlContent: summaryChartHtmlContent())
                 .frame(height: 300)
-                .cornerRadius(10)
-                .overlay(Text("Recommendation Trends Chart Placeholder").foregroundColor(.white))
-            
-            Color.gray
+            ChartWebView(chartType: .eps, viewModel: EPSChartViewModel(stockSymbol: viewModel.stockSymbol))
                 .frame(height: 300)
-                .cornerRadius(10)
-                .overlay(Text("Historical   EPS Surprises Chart Placeholder").foregroundColor(.white))
+
         }
     }
 }
 
 #Preview {
-    StockTrendsEPSView()
+    StockTrendsEPSView(viewModel: StockDetailViewModel(stockSymbol: "AAPL"))
 }

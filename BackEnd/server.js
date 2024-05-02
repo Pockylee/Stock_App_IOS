@@ -329,24 +329,6 @@ app.get('/api/stock/:symbol', async (req, res) => {
     }
 });
 
-// Add a route for the api call to autocomplete
-// app.get('/api/autocomplete/:symbol', async (req, res) => {
-//   const symbol = req.params.symbol;
-//   const apiKey = 'cn9uq59r01qjv5ip1fc0cn9uq59r01qjv5ip1fcg'; // Replace with your actual API key
-//   const url = `https://finnhub.io/api/v1/search?q=${symbol}&token=${apiKey}`;
-
-//   try {
-//       const response = await axios.get(url);
-//       const filteredResults = response.data.result.filter(item => !item.symbol.includes('.'));
-//       res.json({ ...response.data, result: filteredResults });
-//       console.log("Autocomplete Data for symbol:", symbol);
-//       console.log(filteredResults);
-//     //   console.log(response.data.length);
-//     //   console.log(filteredResults);
-//   } catch (error) {
-//       res.status(500).send('Error fetching autocomplete data');
-//   }
-// });
 
 app.get('/api/autocomplete/:symbol', async (req, res) => {
     const symbol = req.params.symbol;
