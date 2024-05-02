@@ -26,6 +26,7 @@ class PortfolioViewModel: ObservableObject {
     func fetchPortfolioData() {
         NetworkService.fetchCashBalance { [weak self] cashBalance in
             self?.cashBalance = cashBalance
+            self?.calculateNetWorth()
         }
         NetworkService.fetchPortfolioItems { [weak self] items in
             self?.portfolioItems = items
@@ -61,9 +62,16 @@ class PortfolioViewModel: ObservableObject {
     }
     
     private func calculateNetWorth() {
-        netWorth = portfolioItems.reduce(0) { $0 + ($1.currentValue * Double($1.shares)) }
-        netWorth += cashBalance // Include cash balance in net worth calculation
-    }
+        if portfolioItems.isEmpty {
+            // If there are no portfolio items, set net worth to the cash balance only.
+//            print("no portfoliosadfadfsadfsadfadfadfsadfaddfa")
+            netWorth = cashBalance}
+            else{
+//                print("no portfoliosadfadfsadfsadfadfadfsadfadfa")
+                netWorth = portfolioItems.reduce(0) { $0 + ($1.currentValue * Double($1.shares)) }
+                netWorth += cashBalance // Include cash balance in net worth calculation
+            }
+        }
     
     deinit {
         updateTimer?.invalidate()

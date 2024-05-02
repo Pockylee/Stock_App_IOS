@@ -12,7 +12,6 @@ struct StockTrendsEPSView: View {
     var body: some View {
         VStack{
             ChartWebView(chartType: .recommendation, viewModel: RecommendationChartViewModel(stockSymbol: viewModel.stockSymbol))
-//                        WebView(htmlContent: summaryChartHtmlContent())
                 .frame(height: 300)
             ChartWebView(chartType: .eps, viewModel: EPSChartViewModel(stockSymbol: viewModel.stockSymbol))
                 .frame(height: 300)
